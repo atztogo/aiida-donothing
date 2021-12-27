@@ -1,0 +1,36 @@
+{
+    "name": "aiida-donothing",
+    "author": "Atsushi Togo",
+    "author_email": "atz.togo@gmail.com",
+    "description": "AiiDA calculation plugin for doing nothing",
+    "url": "https://github.com/atztogo/aiida-donothing",
+    "license": "MIT",
+    "classifiers": [
+        "Programming Language :: Python",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Framework :: AiiDA"
+    ],
+    "version": "0.1",
+    "entry_points": {
+        "aiida.calculations": [
+            "donothing.donothing = aiida_donothing.calculations.donothing:DoNothingCalculation"
+        ],
+        "aiida.parsers": [
+            "donothing.donothing = aiida_donothing.parsers.donothing:DoNothingParser"
+        ]
+    },
+    "include_package_data": true,
+    "setup_requires": ["reentry"],
+    "reentry_register": true,
+    "install_requires": [
+        "aiida-core>=1.6.5,<2.0.0"
+    ],
+    "extras_require": {
+        "testing": [
+            "pgtest~=1.3.1",
+            "pytest~=6.0"
+        ]
+    }
+}
