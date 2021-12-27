@@ -19,15 +19,16 @@ class DoNothingParser(Parser):
     def parse(self, **kwargs):
         """Parse outputs, store results in database."""
         output_filename = self.node.get_option("output_filename")
+        filenames_retrieved = self.retrieved.list_object_names()
 
-        # Check that folder content is as expected
-        if False:
+        if output_filename not in filenames_retrieved:
             return self.exit_codes.ERROR_MISSING_OUTPUT_FILES
 
-        # add output file
-        self.logger.info("Parsing '{}'".format(output_filename))
-        with self.retrieved.open(output_filename, "rb") as handle:
-            output_node = SinglefileData(file=handle)
-        self.out("diff", output_node)
+        for filename in filenames_retrieved:
+            self.logger.info("Parsing '{}'".format(filename))
+            with self.retrieved.open(filename, "rb") as handle:
+                pass
+                # output_node = SinglefileData(file=handle)
+                # self.out(filename, output_node)
 
         return ExitCode(0)
