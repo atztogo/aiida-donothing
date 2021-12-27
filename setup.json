@@ -1,7 +1,7 @@
 {
     "name": "aiida-donothing",
     "author": "Atsushi Togo",
-    "author_email": "",
+    "author_email": "atz.togo@gmail.com",
     "description": "AiiDA calculation plugin for doing nothing",
     "url": "https://github.com/atztogo/aiida-donothing",
     "license": "MIT",
