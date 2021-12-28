@@ -2,7 +2,6 @@
 from aiida.engine import ExitCode
 from aiida.parsers.parser import Parser
 from aiida.common import exceptions
-from aiida.orm import SinglefileData
 
 from aiida_donothing.calculations.donothing import DoNothingCalculation
 
@@ -17,18 +16,19 @@ class DoNothingParser(Parser):
             raise exceptions.ParsingError("Can only parse DoNothingCalculation")
 
     def parse(self, **kwargs):
-        """Parse outputs, store results in database."""
+        """Parse outputs, store results in database.
+
+        Do nothing although we can do something like below.
+
         output_filename = self.node.get_option("output_filename")
         filenames_retrieved = self.retrieved.list_object_names()
-
         if output_filename not in filenames_retrieved:
             return self.exit_codes.ERROR_MISSING_OUTPUT_FILES
-
         for filename in filenames_retrieved:
             self.logger.info("Parsing '{}'".format(filename))
             with self.retrieved.open(filename, "rb") as handle:
-                pass
-                # output_node = SinglefileData(file=handle)
-                # self.out(filename, output_node)
+                output_node = SinglefileData(file=handle)
+                self.out(filename, output_node)
 
+        """
         return ExitCode(0)
